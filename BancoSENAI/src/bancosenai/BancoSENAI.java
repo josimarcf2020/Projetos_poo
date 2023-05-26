@@ -1,122 +1,149 @@
 package bancosenai;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- *
- * @author josimar
- */
 public class BancoSENAI {
 
     public static void main(String[] args) {
-       
-        // Instanciando objetos do tipo ContaBancaria
-        var conta1 = new ContaBancaria();
-        Usuario cliente = new Usuario();
-        var conta2 = new ContaBancaria();       
-        Usuario cliente2 = new Usuario();
-        String nome="", sobrenome="", agencia="", telefone="", conta="", titular="";
-        double saldo;
         
-        Usuario[] clientes = new Usuario[10];   
-        ContaBancaria[] contaBancaria = new ContaBancaria[10];
-        
-        int i = 0;
-        String opc = "";
+        int  opc;
+        boolean isLogin = false;
         
         Scanner in = new Scanner(System.in);
+       
+        ArrayList<Usuario> cliente = new ArrayList();
+        ArrayList<ContaBancaria> conta = new ArrayList();
+        ArrayList<Gerente> gerentes = new ArrayList();
         
-        do {
+        GerenteRepository db_gerente = new GerenteRepository();
+        
+        gerentes = db_gerente.addGerente();
+        
+        do{
             
-            System.out.println("BEM VINDO AO BANCO SENAI\n");
-            System.out.println("\n1. CADASTRO DE CLIENTES\n");
-            System.out.println("\n2. CADASTRO DE CONTAS\n");
-            System.out.println("\n0. FINALIZAR OPERAÇÕES\n");
-            System.out.print("\n Digite a operação: ");
-            opc = in.next();
+            System.out.println("Seja Bem vindo ao Banco SENAI");
+            System.out.println("Login...: ");
+            String login = in.next();
             
-            if(opc.equals("0")){
-                System.out.println("Encerrando... BYE!");
+            if(gerentes.indexOf(login) == -1){
+                System.out.println("Login inválido!");
+                continue;
+            }
+
+            System.out.println("Password: ");
+            String pswd = in.next();
+
+            if(!gerentes.get(gerentes.indexOf(login)).getPassword().equals(pswd)){
+                System.out.println("Senha inválida!");
+                continue;
+            }
+
+            System.out.println("");
+            
+        }while (isLogin != true);
+             
+        do{
+            
+            System.out.println("* * * B A N C O   S E N A I * * *");
+            System.out.println("=================================");
+            System.out.println("");
+            System.out.println("1. Cadastro de clientes");
+            System.out.println("");
+            System.out.println("2. Cadastro de contas");
+            System.out.println("");
+            System.out.println("Sua opção ou 0 para encerrar: ");
+            opc = in.nextInt();
+            
+            if(opc==0){
+                System.out.println("Encerrando Banco SENAI...");
                 break;
             }
             
             switch (opc){
-                case "1":
+                case 1 -> {
+                    
+                    System.out.println(">>>>> CADASTRO DE CLIENTES <<<<<<");
+                    
                     do {
+                        
+                        Usuario cli = new Usuario();
+                        
                         in.nextLine();
-                        System.out.println("\nBANCO SENAI\n");
-                        System.out.println("===============\n");
-                        System.out.print("\n*** Cadastro de clientes ***\n");
-                        System.out.print("\nNome ou FIM para encerrrar: ");
-                        nome = in.nextLine();
+                        System.out.println("Nome do clientes ou FIM: ");
+                        in.nextLine();
+                        String nome = in.nextLine();
                         
                         if(nome.toUpperCase().equals("FIM")){
-                            System.out.println("Encerrando a inserção de clientes");
+                            System.out.println("Finalizando cadastro de clientes");
                             break;
                         }
                         
-                        System.out.print("\nSobrenome.................: ");
-                        sobrenome = in.next();
+                        cli.setNome(nome);
                         
-                        System.out.print("\nTelefone..................: ");
-                        telefone = in.next();
+                        System.out.println("Sobrenome..............: ");
+                        cli.setSobrenome(in.nextLine());
                         
-                        clientes[i].setNome(nome);
-                        clientes[i].setSobrenome(sobrenome);
-                        clientes[i].setTelefone(telefone);              
+                        System.out.println("Tlefone................: ");
+                        cli.setTelefone(in.next());
                         
-                        i += 1;
+                        cliente.add(cli);
+                                
+                    }while (true);
+                }
+                case 2 -> {
+                    
+                    if(cliente.isEmpty()){
+                        System.out.println("Cadastro de clientes VAZIO!");
+                        break;
+                    }
+                    
+                    do{
                         
-                        if(clientes.length <= i){
-                            System.out.println("Limite do Cadastro alcançado...");
+                        ContaBancaria cont = new ContaBancaria();
+                        
+                        System.out.println(">>>>> CADASTRO DE CONTAS <<<<<<");
+                        System.out.println("");
+                        System.out.println("Agência ou FIM: ");
+                        String agencia = in.next();
+                        
+                        if(agencia.equalsIgnoreCase("fim")){
+                            System.out.println("Encerrando cadastro de contas");
                             break;
                         }
+                        
+                        cont.setAgencia(agencia);
+                        
+                        System.out.println("Conta.........: ");
+                        cont.setConta(in.next());
+                        
+                        int n = 1;
+                        System.out.println("CLIENTES CADASTRADOS");
+                        System.out.println("====================");
+                        for(Usuario c: cliente){
+                            System.out.println(n++ +". "+ c);
+                        }
+                        
+                        System.out.println("Selecione o cliente");
+                        int selecionado = in.nextInt();
+                        
+                        cont.setTitular(cliente.get(--selecionado));
+                        
+                        System.out.println("Saldo.........: ");
+                        cont.setSaldo(in.nextDouble());
+                        
+                        conta.add(cont);
                         
                     }while (true);
-                    
-                    break;
-                case "2":
-                    do {
-                        System.out.println("\nBANCO SENAI\n");
-                        System.out.println("===============\n");
-                        System.out.print("\n*** Cadastro de contas ***\n");
-                        System.out.print("\nNumero da agencia ou FIM para encerrrar: ");
-                        agencia = in.next();
-                        
-                        if(agencia.toUpperCase().equals("FIM")){
-                            System.out.println("Encerrando a inserção de contas");
-                            break;
-                        }
-                        
-                        System.out.print("\nConta Bancaria..........................: ");
-                        conta = in.next();
-                        
-                        System.out.print("\nTitular.................................: ");
-                        titular = in.next();
-                        
-                        System.out.print("\nSaldo...................................: ");
-                        saldo = in.nextDouble();
-                        
-                        contaBancaria[i].setAgencia(agencia);
-                        contaBancaria[i].setConta(conta);
-                        contaBancaria[i].setTitular(cliente2);
-                        contaBancaria[i].setSaldo(saldo);
-                        
-                        i += 1;
-                        
-                        if(contaBancaria.length <= i){
-                            System.out.println("Limite do Cadastro alcançado...");
-                            break;
-                        }
-                        
-                    }while (true);
-                    
-                    break;
-                default:
-                    System.out.println("Opção inválida!!!\n\n");
+                }
+                
+                default -> {
+                    System.out.println("Seleção inválida!");
                     continue;
-            }         
-
+                }
+                
+            }
+            
         }while (true);
         
     }

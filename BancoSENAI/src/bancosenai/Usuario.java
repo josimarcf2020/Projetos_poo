@@ -11,7 +11,7 @@ public class Usuario {
     private String nome;
     private String sobrenome;
     private String telefone;
-    private Date dataRegistro = new Date();
+    
     
     Usuario(){
         
@@ -45,14 +45,6 @@ public class Usuario {
     
     public void setTelefone(String telefone){
         this.telefone = telefone;
-    }
-    
-    public Date getDataRegistro(){
-        return this.dataRegistro;
-    }
-    
-    public void getDataRegistro(Date dataRegistro){
-        this.dataRegistro = dataRegistro;
     }
     
     String imprimirInfo(){

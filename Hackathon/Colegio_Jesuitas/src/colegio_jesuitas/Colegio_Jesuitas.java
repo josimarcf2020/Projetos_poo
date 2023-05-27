@@ -79,9 +79,6 @@ public class Colegio_Jesuitas {
 
                             aluno.add(al);
 
-                            System.out.println("Aluno cadastrado!");
-                            System.out.println("");
-                            
                         }                      
                         
                         System.out.println("TURMAS DISPONIVEIS");
@@ -158,6 +155,74 @@ public class Colegio_Jesuitas {
                     
                     break;
                 case "3":
+                    
+                    if(turma.isEmpty()){
+                        System.out.println("");
+                        System.out.println("Cadastro de turmas vazio! Cadastre turmas...");
+                        continue;
+                    }
+                    
+                    if(aluno.isEmpty()){
+                        System.out.println("");
+                        System.out.println("Cadastro de alunos vazio! Cadastre alunos...");
+                        continue;
+                    }
+                    
+                    ArrayList<Notas> notas = new ArrayList<>();
+                    
+                    System.out.println("# # # #   C A D A S T R O   D E   N O T A S   # # # # ");
+                    
+                    do{
+                        
+                        Notas nota = new Notas();
+                        
+                        System.out.println("");
+                        System.out.println("Id. do Aluno ou [000] para sair: ");
+                        String mat = input.next();
+                        
+                        if(mat.equals("000")){
+                            System.out.println("Saindo do Cadastro de Notas...");
+                            break;
+                        }
+                        
+                        boolean exist = false;
+                        for(Aluno a: aluno){
+                            if(a.getIdAluno().equals(mat)){
+                                System.out.print(a.getNome());
+                                exist = true;
+                            }
+                        }
+                        
+                        if(!exist){
+                            System.out.println("Matricula ENEXISTENTE!!!");
+                            continue;
+                        }
+                        
+                        exist = false;
+                        for(Notas n : notas){
+                            if(n.getIdAluno().equals(mat)){
+                                exist = true;
+                                System.out.println("Notas já cadastradas!");
+                                break;
+                            }
+                        }
+                        
+                        if(!exist){
+                            nota.setIdAluno(mat);
+                            System.out.println("Digite a primeira nota: ");
+                            nota.setNota1(input.nextDouble());
+                            System.out.println("Digite a segunda nota.: ");
+                            nota.setNota2(input.nextDouble());
+                            System.out.println("Digite a terceira nota: ");
+                            nota.setNota3(input.nextDouble());
+                            System.out.println("Média final do aluno..:");
+                            System.out.printf("%.2f\n", nota.calculaMedia( nota.getNota1(), nota.getNota2(), nota.getNota3()));                                                     
+                        }
+                        
+                        System.out.println("Notas cadastradas com SUCESSO!!!");
+                        
+                    }while (true);
+                                        
                     break;
                 case "4":
                     break;

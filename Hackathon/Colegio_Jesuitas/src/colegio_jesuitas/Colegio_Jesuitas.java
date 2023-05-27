@@ -79,6 +79,8 @@ public class Colegio_Jesuitas {
 
                             aluno.add(al);
 
+                        }else{
+                            continue;
                         }                      
                         
                         System.out.println("TURMAS DISPONIVEIS");

@@ -41,7 +41,7 @@ public class Colegio_Jesuitas {
                     
                     System.out.println("# # # #   C A D A S T R O   D E   A L U N O S   # # # # ");
                     
-                    if(turma.size() == 0){
+                    if(turma.isEmpty()){
                         System.out.println("");
                         System.out.println("Cadastro de turmas vazio! Cadastre turmas...");
                         continue;
@@ -84,19 +84,32 @@ public class Colegio_Jesuitas {
                             
                         }                      
                         
-                        Turma t = new Turma();
-                        
                         System.out.println("TURMAS DISPONIVEIS");
                         int seq = 1;
                         for(Turma trm: turma){
-                            System.out.printf("%d. %s %s", seq++, trm.getIdTurma(), trm.getNomeTurma());
+                            System.out.printf("%d. %s %s \n", seq++, trm.getIdTurma(), trm.getNomeTurma());
                         }
                         System.out.println("");
                         System.out.println("Informe o numero da turma: ");
                         int num = input.nextInt();
+                        
+                        if(num>seq || num < 1){
+                            System.out.println("Referencia de turma inválida");
+                            continue;
+                        }else{
+                            
+                            String nt = turma.get(num-1).getIdTurma();
+                            
+                            Alunos_turma a_t = new Alunos_turma();
+                            
+                            a_t.setIdAluno(mat);
+                            a_t.setIdTurma(nt);
+                                                        
+                            alunos_turma.add(a_t);
+                            
+                        }
                                               
-                        t.setIdAluno(mat);
-                        a_t.setIdTurma(idTurma);
+                        System.out.println("Aluno cadastrado com SUCESSO!");                                
                         
                     }while(true);
                 

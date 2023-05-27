@@ -3,34 +3,34 @@ package colegio_jesuitas;
 
 public class Alunos_turma {
     
-    private Turma idTurma;
-    private Aluno idAluno;
+    private String idTurma;
+    private String idAluno;
 
     public Alunos_turma() {
     }
 
-    public Alunos_turma(Turma idTurma, Aluno idAluno) {
+    public Alunos_turma(String idTurma, String idAluno) {
         this.idTurma = idTurma;
         this.idAluno = idAluno;
     }
 
-    public Turma getIdTurma() {
+    public String getIdTurma() {
         return idTurma;
     }
 
-    public void setIdTurma(Turma idTurma) {
+    public void setIdTurma(String idTurma) {
         this.idTurma = idTurma;
     }
 
-    public Aluno getIdAluno() {
+    public String getIdAluno() {
         return idAluno;
     }
 
-    public void setIdAluno(Aluno idAluno) {
+    public void setIdAluno(String idAluno) {
         this.idAluno = idAluno;
     }
     
-    public void alocarAluno(Aluno idAluno, Turma idTurma){
+    public void alocarAluno(String idAluno, String idTurma){
         setIdTurma(idTurma);
         setIdAluno(idAluno);
     }

@@ -278,11 +278,17 @@ public class Colegio_Jesuitas {
                                     break;
                                 }
                                 
+                                boolean exist = false;
                                 for(Turma trm: turma){
-                                    if(!trm.getIdTurma().equals(t)){
-                                        System.out.println("Turma INEXISTENTE!!");
+                                    if(trm.getIdTurma().equals(t)){
+                                        exist = true;
                                         break;
                                     }
+                                }
+                                
+                                if(!exist){
+                                    System.out.println("Turma INEXISTENTE!!");
+                                    continue;
                                 }
                                 
                                 System.out.println("");
@@ -293,20 +299,23 @@ public class Colegio_Jesuitas {
                                 
                                 int seq = 1;
                                 for(Alunos_turma at: alunos_turma){
+                                                                        
                                     System.out.println("Turma >>>>>> " + at.getIdTurma());
                                     System.out.println("--------------------------------------------------------------------");
+                                    
                                     if(at.getIdTurma().equals(t)){
                                         System.out.printf("%d. %s", seq++, at.getIdAluno());
+                                        
                                         for(Aluno a: aluno){
                                             if(a.getIdAluno().equals(at.getIdAluno())){
                                                 System.out.printf(" %s %s\n",a.getNome(), at.getIdTurma());
                                                 System.out.println("--------------------------------------------------------------------");
                                             }
                                         }
-                                        break;
+                                       
                                     }
                                 }
-                                
+                                                             
                                 System.out.println("");
                                                                 
                                 break;

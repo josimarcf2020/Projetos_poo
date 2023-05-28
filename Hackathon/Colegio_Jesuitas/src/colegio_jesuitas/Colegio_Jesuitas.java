@@ -221,6 +221,8 @@ public class Colegio_Jesuitas {
                             System.out.printf("%.2f\n", nota.calculaMedia( nota.getNota1(), nota.getNota2(), nota.getNota3()));                                                     
                         }
                         
+                        notas.add(nota);
+                        
                         System.out.println("Notas cadastradas com SUCESSO!!!");
                         
                     }while (true);
@@ -310,15 +312,17 @@ public class Colegio_Jesuitas {
                                         
                                         for(Aluno a: aluno){
                                             if(a.getIdAluno().equals(at.getIdAluno())){
-                                                System.out.printf(" %s %s\n",a.getNome(), at.getIdTurma());
+                                                System.out.printf(" %s %s",a.getNome(), at.getIdTurma());
+                                                
                                                 for(Notas n : notas){
                                                     if(n.getIdAluno().equals(a.getIdAluno())){
-                                                        System.out.printf("%.2f %.2f %.2f %.2f", n.getNota1(), n.getNota2(), 
+                                                        System.out.printf("%.2f %.2f %.2f %.2f\n", n.getNota1(), n.getNota2(), 
                                                                 n.getNota3(), n.calculaMedia(n.getNota1(), n.getNota2(), 
                                                                         n.getNota3()));
+                                                        
+                                                        System.out.println("--------------------------------------------------------------------");
                                                     }
                                                 }
-                                                System.out.println("--------------------------------------------------------------------");
                                             }
                                         }
                                     }

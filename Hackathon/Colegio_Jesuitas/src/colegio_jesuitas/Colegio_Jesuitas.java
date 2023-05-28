@@ -86,15 +86,16 @@ public class Colegio_Jesuitas {
                         for(Turma trm: turma){
                             System.out.printf("%d. %s %s \n", seq++, trm.getIdTurma(), trm.getNomeTurma());
                         }
+                        
                         System.out.println("");
                         System.out.println("Informe o numero da turma: ");
                         int num = input.nextInt();
                         
-                        if(num>seq || num < 1){
+                        if(num>=seq || num < 1){
                             System.out.println("Referencia de turma inválida");
                             continue;
                         }else{
-                            
+                                                       
                             aluno.add(al);
                             
                             String nt = turma.get(num-1).getIdTurma();
@@ -115,7 +116,7 @@ public class Colegio_Jesuitas {
                     break;
                 case "2":
                     
-                    System.out.println("# # # #   C A D A S T R O   D E   T U R M A S   #1 # # # ");
+                    System.out.println("# # # #   C A D A S T R O   D E   T U R M A S   # # # # ");
                     
                     do{
                         
@@ -249,7 +250,8 @@ public class Colegio_Jesuitas {
                     System.out.println("# # # #   E M I S S Ã O   D E   R E L A T Ó R I O   # # # # ");
                     
                     do{
-                                              
+                               
+                        System.out.println("");
                         System.out.println("1. Relatorio de Alunos por Turma");
                         System.out.println("");
                         System.out.println("2. Relatorio de Aluno (alfabetica)");
@@ -283,6 +285,7 @@ public class Colegio_Jesuitas {
                                     }
                                 }
                                 
+                                System.out.println("");
                                 System.out.println("* * * * * *   E S C O L A   J E S U Í T A S   * * * * * * ");
                                 System.out.println("");
                                 System.out.println("R E L A T O R I O   D E   A L U N O S   P O R   T U R M A ");
@@ -290,11 +293,14 @@ public class Colegio_Jesuitas {
                                 
                                 int seq = 1;
                                 for(Alunos_turma at: alunos_turma){
+                                    System.out.println("Turma >>>>>> " + at.getIdTurma());
+                                    System.out.println("--------------------------------------------------------------------");
                                     if(at.getIdTurma().equals(t)){
                                         System.out.printf("%d. %s", seq++, at.getIdAluno());
                                         for(Aluno a: aluno){
                                             if(a.getIdAluno().equals(at.getIdAluno())){
-                                                System.out.print(a.getNome());
+                                                System.out.printf(" %s %s\n",a.getNome(), at.getIdTurma());
+                                                System.out.println("--------------------------------------------------------------------");
                                             }
                                         }
                                         break;
@@ -308,7 +314,7 @@ public class Colegio_Jesuitas {
                                 break;
                             default:
                         
-                    }
+                        }
                                         
                         
                         System.out.println("");

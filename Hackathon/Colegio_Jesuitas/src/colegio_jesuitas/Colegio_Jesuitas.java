@@ -10,6 +10,7 @@ public class Colegio_Jesuitas {
         
         ArrayList<Aluno> aluno = new ArrayList<>();
         ArrayList<Turma> turma = new ArrayList<>();
+        ArrayList<Notas> notas = new ArrayList<>();
         ArrayList<Alunos_turma> alunos_turma = new ArrayList<>();
         
         Scanner input = new Scanner(System.in);
@@ -170,9 +171,7 @@ public class Colegio_Jesuitas {
                         System.out.println("Cadastro de alunos vazio! Cadastre alunos...");
                         continue;
                     }
-                    
-                    ArrayList<Notas> notas = new ArrayList<>();
-                    
+                                      
                     System.out.println("# # # #   C A D A S T R O   D E   N O T A S   # # # # ");
                     
                     do{
@@ -300,7 +299,10 @@ public class Colegio_Jesuitas {
                                 int seq = 1;
                                 for(Alunos_turma at: alunos_turma){
                                                                         
-                                    System.out.println("Turma >>>>>> " + at.getIdTurma());
+                                    if(seq==1){
+                                        System.out.println("Turma >>>>>> " + at.getIdTurma());
+                                    }
+                                    
                                     System.out.println("--------------------------------------------------------------------");
                                     
                                     if(at.getIdTurma().equals(t)){
@@ -309,10 +311,16 @@ public class Colegio_Jesuitas {
                                         for(Aluno a: aluno){
                                             if(a.getIdAluno().equals(at.getIdAluno())){
                                                 System.out.printf(" %s %s\n",a.getNome(), at.getIdTurma());
+                                                for(Notas n : notas){
+                                                    if(n.getIdAluno().equals(a.getIdAluno())){
+                                                        System.out.printf("%.2f %.2f %.2f %.2f", n.getNota1(), n.getNota2(), 
+                                                                n.getNota3(), n.calculaMedia(n.getNota1(), n.getNota2(), 
+                                                                        n.getNota3()));
+                                                    }
+                                                }
                                                 System.out.println("--------------------------------------------------------------------");
                                             }
                                         }
-                                       
                                     }
                                 }
                                                              

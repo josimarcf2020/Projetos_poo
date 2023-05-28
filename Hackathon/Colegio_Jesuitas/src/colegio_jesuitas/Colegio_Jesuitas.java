@@ -316,10 +316,9 @@ public class Colegio_Jesuitas {
                                                 
                                                 for(Notas n : notas){
                                                     if(n.getIdAluno().equals(a.getIdAluno())){
-                                                        System.out.printf("%.2f %.2f %.2f %.2f\n", n.getNota1(), n.getNota2(), 
-                                                                n.getNota3(), n.calculaMedia(n.getNota1(), n.getNota2(), 
-                                                                        n.getNota3()));
-                                                        
+                                                        double media = n.calculaMedia(n.getNota1(), n.getNota2(), n.getNota3());
+                                                        System.out.printf("Prv 1: %.2f Prv 2: %.2f Prv 3: %.2f Media: %.2f %s\n", n.getNota1(), n.getNota2(), 
+                                                                n.getNota3(), media, n.resultado(media));                                                        
                                                         System.out.println("--------------------------------------------------------------------");
                                                     }
                                                 }

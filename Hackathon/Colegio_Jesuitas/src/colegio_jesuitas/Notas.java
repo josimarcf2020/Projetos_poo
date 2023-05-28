@@ -54,4 +54,11 @@ public class Notas {
         return (nota1 + nota2 + nota3)/3;
     }
     
+    public String resultado(double media){
+        String result = "Reprovado(a)";
+        if(media >= 7){
+            result = "Aprovado(a)";
+        }
+        return result;
+    }
 }

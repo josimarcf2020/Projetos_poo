@@ -77,8 +77,6 @@ public class Colegio_Jesuitas {
                             System.out.println("Nome completo...............:");
                             al.setNome(input.nextLine());
 
-                            aluno.add(al);
-
                         }else{
                             continue;
                         }                      
@@ -96,6 +94,8 @@ public class Colegio_Jesuitas {
                             System.out.println("Referencia de turma inválida");
                             continue;
                         }else{
+                            
+                            aluno.add(al);
                             
                             String nt = turma.get(num-1).getIdTurma();
                             
@@ -227,10 +227,97 @@ public class Colegio_Jesuitas {
                                         
                     break;
                 case "4":
+                    
+                    if(turma.isEmpty()){
+                        System.out.println("");
+                        System.out.println("Cadastro de turmas vazio! Cadastre turmas...");
+                        continue;
+                    }
+                    
+                    if(aluno.isEmpty()){
+                        System.out.println("");
+                        System.out.println("Cadastro de alunos vazio! Cadastre alunos...");
+                        continue;
+                    }
+                    
+                    if(alunos_turma.isEmpty()){
+                        System.out.println("");
+                        System.out.println("Cadastro de alunos por turma vazio! Cadastre!!!");
+                        continue;
+                    }
+                    
+                    System.out.println("# # # #   E M I S S Ã O   D E   R E L A T Ó R I O   # # # # ");
+                    
+                    do{
+                                              
+                        System.out.println("1. Relatorio de Alunos por Turma");
+                        System.out.println("");
+                        System.out.println("2. Relatorio de Aluno (alfabetica)");
+                        System.out.println("");
+                        System.out.println("0. Sair");
+                        System.out.println("Informe o tipo de Relatório ou 0 para sair:");
+                        String rel = input.next();
+                        
+                        if(rel.equals("0")){
+                            System.out.println("Encerrando emissão de relatórios...");
+                            break;
+                        }
+                                                                 
+                        switch (rel){
+                            case "1":
+                                
+                                System.out.println("R E L A T O R I O   D E   A L U N O S   P O R   T U R M A ");
+                                System.out.println("");
+                                System.out.println("Informe a Turma a imprimir ou 0 para Sair:");
+                                String t = input.next();
+                                
+                                if(t.equals("0")){
+                                    System.out.println("Retornando ao menu de relatórios...");
+                                    break;
+                                }
+                                
+                                for(Turma trm: turma){
+                                    if(!trm.getIdTurma().equals(t)){
+                                        System.out.println("Turma INEXISTENTE!!");
+                                        break;
+                                    }
+                                }
+                                
+                                System.out.println("* * * * * *   E S C O L A   J E S U Í T A S   * * * * * * ");
+                                System.out.println("");
+                                System.out.println("R E L A T O R I O   D E   A L U N O S   P O R   T U R M A ");
+                                System.out.println("");
+                                
+                                int seq = 1;
+                                for(Alunos_turma at: alunos_turma){
+                                    if(at.getIdTurma().equals(t)){
+                                        System.out.printf("%d. %s", seq++, at.getIdAluno());
+                                        for(Aluno a: aluno){
+                                            if(a.getIdAluno().equals(at.getIdAluno())){
+                                                System.out.print(a.getNome());
+                                            }
+                                        }
+                                        break;
+                                    }
+                                }
+                                
+                                System.out.println("");
+                                                                
+                                break;
+                            case "2":
+                                break;
+                            default:
+                        
+                    }
+                                        
+                        
+                        System.out.println("");
+                    }while (true);
+                    
                     break;
                 default:
                     System.out.println("Selecione uma operação válida!");
-                    continue;
+               
             }
             
         }while (true);

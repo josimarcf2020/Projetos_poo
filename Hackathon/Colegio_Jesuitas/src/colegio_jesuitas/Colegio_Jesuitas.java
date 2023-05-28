@@ -23,8 +23,8 @@ public class Colegio_Jesuitas {
             System.out.println("");        
             System.out.println("Selecione a operaçãodesejada");
             System.out.println("");
-            System.out.println("1. Cadastro de Alunoss");
-            System.out.println("2. Cadastro de Turmas");
+            System.out.println("1. Cadastro de Turmas");
+            System.out.println("2. Cadastro de Alunos");
             System.out.println("3. Cadastro de Notas");
             System.out.println("4. Emitir Relatório");
             System.out.println("0. Sair do Sistema");
@@ -39,7 +39,50 @@ public class Colegio_Jesuitas {
             
             switch (opc){
                 case "1":
+                                        
+                    System.out.println("# # # #   C A D A S T R O   D E   T U R M A S   # # # # ");
                     
+                    do{
+                        
+                        Turma t = new Turma();
+                        
+                        System.out.println("");
+                        System.out.println("Id. Turma ou [000} para sair: ");
+                        String tur = input.next();
+
+                        if(tur.equals("000")){
+                            System.out.println("Saindo do Cadastro de Turmas:");
+                            break;
+                        } 
+                        
+                        boolean exist = false;
+                        for(Turma trm: turma){
+                            if(trm.getIdTurma().equals(tur)){
+                                System.out.println("Turma já existe!!");
+                                exist = true;
+                                break;
+                            }
+                        }
+                                              
+                        if(!exist){                          
+                                                   
+                            t.setIdTurma(tur);
+
+                            input.nextLine();
+                            System.out.println("Descrição da Turma..........: ");
+                            t.setNomeTurma(input.nextLine());
+
+                            turma.add(t);
+
+                            System.out.println("Turma cadastrada!");
+                            System.out.println("");
+                        }
+                        
+                    }while(true);
+                                    
+                    break;
+                case "2":
+
                     System.out.println("# # # #   C A D A S T R O   D E   A L U N O S   # # # # ");
                     
                     if(turma.isEmpty()){
@@ -113,50 +156,7 @@ public class Colegio_Jesuitas {
                         System.out.println("Aluno cadastrado com SUCESSO!");                                
                         
                     }while(true);
-                
-                    break;
-                case "2":
-                    
-                    System.out.println("# # # #   C A D A S T R O   D E   T U R M A S   # # # # ");
-                    
-                    do{
-                        
-                        Turma t = new Turma();
-                        
-                        System.out.println("");
-                        System.out.println("Id. Turma ou [000} para sair: ");
-                        String tur = input.next();
 
-                        if(tur.equals("000")){
-                            System.out.println("Saindo do Cadastro de Turmas:");
-                            break;
-                        } 
-                        
-                        boolean exist = false;
-                        for(Turma trm: turma){
-                            if(trm.getIdTurma().equals(tur)){
-                                System.out.println("Turma já existe!!");
-                                exist = true;
-                                break;
-                            }
-                        }
-                                              
-                        if(!exist){                          
-                                                   
-                            t.setIdTurma(tur);
-
-                            input.nextLine();
-                            System.out.println("Descrição da Turma..........: ");
-                            t.setNomeTurma(input.nextLine());
-
-                            turma.add(t);
-
-                            System.out.println("Turma cadastrada!");
-                            System.out.println("");
-                        }
-                        
-                    }while(true);
-                    
                     break;
                 case "3":
                     

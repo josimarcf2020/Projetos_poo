@@ -6,23 +6,12 @@ package bancosenai;
 
 import java.util.Date;
 
-public class Usuario {
+public abstract class Usuario {
    
     private String nome;
     private String sobrenome;
     private String telefone;
-    
-    
-    Usuario(){
-        
-    }
-    
-    Usuario(String nm, String snome, String tel){
-        this.nome = nm;
-        this.sobrenome = snome;
-        this.telefone = tel;
-    }
-    
+       
     public String getNome(){
         return this.nome;
     }
@@ -47,7 +36,6 @@ public class Usuario {
         this.telefone = telefone;
     }
     
-    String imprimirInfo(){
-        return String.format("Nome: %s\nSobrenome: %s\nTelefone: %s Data de Registro: %d", nome, sobrenome, telefone, dataRegistro);
-    }
+    public abstract String imprimirInfo();
+    
 }

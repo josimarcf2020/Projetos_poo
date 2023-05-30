@@ -11,7 +11,9 @@ public class Cliente extends Usuario {
     }
 
     public Cliente(String nm, String snome, String tel) {
-        super(nm, snome, tel);
+        this.setNome(nm);
+        this.setSobrenome(snome);
+        this.setTelefone(tel);
     }
     
     public Date getDataRegistro() {
@@ -23,7 +25,7 @@ public class Cliente extends Usuario {
     }
     
     @Override
-    String imprimirInfo(){
+    public String imprimirInfo(){
         return String.format("Nome: %s\nSobrenome: %s\nTelefone: %s Data de Registro: %d",
                 super.getNome(), super.getSobrenome(), super.getTelefone(), this.getDataRegistro());
     }

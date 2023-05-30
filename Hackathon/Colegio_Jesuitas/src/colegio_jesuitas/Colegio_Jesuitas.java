@@ -335,8 +335,7 @@ public class Colegio_Jesuitas {
                             default:
                         
                         }
-                                        
-                        
+
                         System.out.println("");
                     }while (true);
                     

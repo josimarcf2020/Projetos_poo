@@ -67,7 +67,7 @@ public class BancoSENAI {
                     
                     do {
                         
-                        Usuario cli = new Usuario();
+                        Cliente cli = new Cliente();
                         
                         in.nextLine();
                         System.out.println("Nome do clientes ou FIM: ");

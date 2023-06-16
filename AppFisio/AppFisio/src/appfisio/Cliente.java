@@ -103,4 +103,16 @@ public class Cliente {
         
     }
     
+    public void consultar(){
+        
+    }
+    
+    public void atualizar(){
+        
+    }
+    
+    public void deletar(){
+        
+    }
+    
 }

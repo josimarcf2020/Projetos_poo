@@ -13,7 +13,7 @@ import java.util.Date;
 public class Receituario {
     
     private int codigo;
-    private Atendimento atendimento;
+    private Atendimentos atendimento;
     private Date data;
     private String medicacao;
     private String posologia;
@@ -21,7 +21,7 @@ public class Receituario {
     public Receituario() {
     }
 
-    public Receituario(int codigo, Atendimento atendimento, Date data, String medicacao, String posologia) {
+    public Receituario(int codigo, Atendimentos atendimento, Date data, String medicacao, String posologia) {
         this.codigo = codigo;
         this.atendimento = atendimento;
         this.data = data;
@@ -37,11 +37,11 @@ public class Receituario {
         this.codigo = codigo;
     }
 
-    public Atendimento getAtendimento() {
+    public Atendimentos getAtendimento() {
         return atendimento;
     }
 
-    public void setAtendimento(Atendimento atendimento) {
+    public void setAtendimento(Atendimentos atendimento) {
         this.atendimento = atendimento;
     }
 

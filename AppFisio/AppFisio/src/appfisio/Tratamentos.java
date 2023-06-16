@@ -13,7 +13,7 @@ import java.util.Date;
 public class Tratamentos {
     
     private int codigo;
-    private Atendimento atendimento;
+    private Atendimentos atendimento;
     private String tratamento;
     private Date dataInicio;
     private Date dataFinal;
@@ -22,7 +22,7 @@ public class Tratamentos {
     public Tratamentos() {
     }
 
-    public Tratamentos(int codigo, Atendimento atendimento, String tratamento, Date dataInicio, Date dataFinal, int duracao) {
+    public Tratamentos(int codigo, Atendimentos atendimento, String tratamento, Date dataInicio, Date dataFinal, int duracao) {
         this.codigo = codigo;
         this.atendimento = atendimento;
         this.tratamento = tratamento;
@@ -39,11 +39,11 @@ public class Tratamentos {
         this.codigo = codigo;
     }
 
-    public Atendimento getAtendimento() {
+    public Atendimentos getAtendimento() {
         return atendimento;
     }
 
-    public void setAtendimento(Atendimento atendimento) {
+    public void setAtendimento(Atendimentos atendimento) {
         this.atendimento = atendimento;
     }
 

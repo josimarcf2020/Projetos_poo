@@ -7,6 +7,7 @@ package sap_pratica;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 
 /**
@@ -25,6 +26,7 @@ public class SAP_Pratica {
         ArrayList<Admin> admin = new ArrayList();
         ArrayList<Cliente> clientes = new ArrayList();
         ArrayList<Produto> produtos = new ArrayList();
+        ArrayList<Pedido> pedidos = new ArrayList();
         
         Admin adm = new Admin();
         Cliente cli = new Cliente();
@@ -232,6 +234,10 @@ public class SAP_Pratica {
                         System.out.println("");
                         System.out.println("2. Realizar Pedidos");
                         System.out.println("");
+                        System.out.println("3. Consultar Pedidos");
+                        System.out.println("");
+                        System.out.println("4. Finalizar Pedido");
+                        System.out.println("");
                         System.out.print("Informe sua opção ou ZERO para sair: ");
                         opc = input.next();
                         
@@ -260,7 +266,7 @@ public class SAP_Pratica {
                             }
                             case "2" -> {
                                 
-                                ArrayList<Pedido> pedidos = new ArrayList();
+                                Pedido ped = new Pedido();
                                 
                                 System.out.println("");
                                 System.out.println("==== M A R I S A   B E A C H ====");
@@ -278,15 +284,44 @@ public class SAP_Pratica {
                                 }
                                 
                                 System.out.println("Informe o item: ");
-                                int itm = input.nextInt()-1;
+                                int itm = input.nextInt();
                                 
-                                if(itm > produtos.size() || itm < 0){
+                                if(itm-1 > produtos.size() || itm-1 < 0){
                                     System.out.println("Item não consta na lista");
                                     continue;
                                 }
                                 
-                                int numPed = pedidos.get(pedidos.size()-1).getNumPedido() + 1;
+                                if(pedidos.isEmpty()){
+                                    ped.setNumPedido(1);
+                                }else{
+                                    ped.setNumPedido(pedidos.get(pedidos.size()-1).getNumPedido() + 1);
+                                }
                                 
+                                ped.setDataCriacao(formato.getCalendar().getTime());
+                                ped.setProduto(produtos.get(itm-1).getNome());
+                                ped.setValor(produtos.get(itm-1).getValor());
+                                
+                                pedidos.add(ped);
+                                
+                                System.out.println("Pedido Realizado com sucesso!!!");
+                                
+                                break;
+                            }
+                            case "3" -> {
+                                
+                                Pedido ped = new Pedido();
+                                    
+                                System.out.println("");
+                                System.out.println("==== M A R I S A   B E A C H ====");
+                                System.out.println("");
+                                System.out.println("LISTA DE PRODUTOS");
+                                System.out.println("-------------------------------");
+                                int item = 1;
+                                for(Produto p:produtos){
+                                    System.out.printf("%d \t%s \tR$ %.2f\n", item++, p.getNome(), p.getValor());
+                                }
+                                
+                                break;
                                 break;
                             }
                             default -> System.out.println("Opção inválida!!!");

@@ -4,6 +4,8 @@
  */
 package sap_pratica;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,8 +18,33 @@ public class SAP_Pratica {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        
+        ArrayList<Admin> admin = new ArrayList();
+        ArrayList<Cliente> clientes = new ArrayList();
+        
+        Admin adm = new Admin();
+        Cliente cli = new Cliente();
+        
+        adm.setNomeAdmin("admin");
+        adm.setLogin("admin1234");
+        adm.setSenha("@1234");
+        adm.setEmail("admin@admin.br");
+        adm.setDataRegistro(formato.parse("16/06/2023"));
+        
+        admin.add(adm);
+        
+        cli.setNomeCliente("Cliente 1");
+        cli.setLogin("cliente01");
+        cli.setSenha("cli1234");
+        cli.setEmail("cliente01@loja.br");
+        cli.setDataRegistro(formato.parse("17/06/2023"));
+        cli.setEndereco("Rua 100, 235");
+        
+        clientes.add(cli);
+                
         Scanner input = new Scanner(System.in);
         
         do{
@@ -43,13 +70,27 @@ public class SAP_Pratica {
                 case "1" -> {
                     
                     ArrayList<Produto> produtos = new ArrayList();
-                    String prod;
+                    String prod, xLog, xSenha;
                     double val;
                     
                     do{
                         
                         System.out.println("");
                         System.out.println("==== M A R I S A   B E A C H ====");
+                        System.out.println("");
+                        System.out.println("LOGIN DO ADMINISTRADOR");
+                        System.out.println("");
+                        System.out.println("Login: ");
+                        xLog = input.next();
+                        System.out.println("");
+                        System.out.println("Senha: ");
+                        xSenha = input.next();
+                        
+                        if(!xSenha.equals(admin.get(0).getSenha())){
+                            System.out.println("Login ou senha inválido!");
+                            break;
+                        }
+                        
                         System.out.println("");
                         System.out.println("MENU ADMINISTRADOR");
                         System.out.println("");
@@ -93,6 +134,8 @@ public class SAP_Pratica {
                                     produtos.add(prd);
                                     
                                 }while(true);
+                                
+                                break;
                                 
                             }
                             case "2" -> {
@@ -143,12 +186,16 @@ public class SAP_Pratica {
                                     }
                                     
                                 }while(true);
+                                
+                                break;
                                                            
                             }
                             default -> System.out.println("Opção inválida!!!");
                         }
                         
                     }while(true);
+                    
+                    break;
                     
                 }
                 case "2" -> {
@@ -158,6 +205,8 @@ public class SAP_Pratica {
                         System.out.println("");
                         System.out.println("==== M A R I S A   B E A C H ====");
                         System.out.println("");
+                        
+                        
                         System.out.println("MENU CLIENTE");
                         System.out.println("");
                         System.out.println("1. Visualizar Produtos");
@@ -174,13 +223,18 @@ public class SAP_Pratica {
                         
                         switch(opc){
                             case "1" -> {
+                                break;
                             }
                             case "2" -> {
+                                break;
                             }
                             default -> System.out.println("Opção inválida!!!");
                         }
                         
                     }while(true);
+                    
+                    break;
+                    
                 }
                 default -> System.out.println("Opção inválida!!!");
                             

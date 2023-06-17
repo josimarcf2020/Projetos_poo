@@ -24,9 +24,13 @@ public class SAP_Pratica {
         
         ArrayList<Admin> admin = new ArrayList();
         ArrayList<Cliente> clientes = new ArrayList();
+        ArrayList<Produto> produtos = new ArrayList();
         
         Admin adm = new Admin();
         Cliente cli = new Cliente();
+        
+        String prod, xLog, xSenha;
+        double val;
         
         adm.setNomeAdmin("admin");
         adm.setLogin("admin1234");
@@ -67,30 +71,28 @@ public class SAP_Pratica {
             }
             
             switch(opc){
+                
                 case "1" -> {
                     
-                    ArrayList<Produto> produtos = new ArrayList();
-                    String prod, xLog, xSenha;
-                    double val;
+                    System.out.println("");
+                    System.out.println("==== M A R I S A   B E A C H ====");
+                    System.out.println("");
+                    System.out.println("LOGIN DO ADMINISTRADOR");
+                    System.out.println("");
+                    System.out.println("Login: ");
+                    xLog = input.next();
+                    System.out.println("");
+                    System.out.println("Senha: ");
+                    xSenha = input.next();
+                        
+                    if(!xSenha.equals(admin.get(0).getSenha()) || 
+                       !xLog.equals(admin.get(0).getLogin())){
+                        System.out.println("Login ou senha inválido!");
+                        break;
+                    }
                     
                     do{
-                        
-                        System.out.println("");
-                        System.out.println("==== M A R I S A   B E A C H ====");
-                        System.out.println("");
-                        System.out.println("LOGIN DO ADMINISTRADOR");
-                        System.out.println("");
-                        System.out.println("Login: ");
-                        xLog = input.next();
-                        System.out.println("");
-                        System.out.println("Senha: ");
-                        xSenha = input.next();
-                        
-                        if(!xSenha.equals(admin.get(0).getSenha())){
-                            System.out.println("Login ou senha inválido!");
-                            break;
-                        }
-                        
+                               
                         System.out.println("");
                         System.out.println("MENU ADMINISTRADOR");
                         System.out.println("");
@@ -98,7 +100,7 @@ public class SAP_Pratica {
                         System.out.println("");
                         System.out.println("2. Atualizar Cadastro de Produtos");
                         System.out.println("");
-                        System.out.print("Informe sua opção ou ZERO para sair:");
+                        System.out.print("Informe sua opção ou ZERO para sair: ");
                         opc = input.next();
                         
                         if(opc.equals("0")){
@@ -179,7 +181,7 @@ public class SAP_Pratica {
                                     produtos.get(it-1).setValor(vl);
                                     
                                     System.out.println("Atualizar mais produtos? S/N");
-                                    continua = input.next();
+                                    continua = input.next().toUpperCase();
                                     
                                     if(continua.equals("N")){
                                         break;
@@ -200,12 +202,29 @@ public class SAP_Pratica {
                 }
                 case "2" -> {
                     
+                    if(produtos.isEmpty()){
+                        System.out.println("Cadastro de produtos VAZIO. Contate o Administrador do site");
+                        break;
+                    }
+
+                    System.out.println("");
+                    System.out.println("==== M A R I S A   B E A C H ====");
+                    System.out.println("");
+                    System.out.println("LOGIN DO CLIENTE");
+                    System.out.println("");
+                    System.out.println("Login: ");
+                    xLog = input.next();
+                    System.out.println("");
+                    System.out.println("Senha: ");
+                    xSenha = input.next();
+                        
+                    if(!xSenha.equals(clientes.get(0).getSenha()) || 
+                       !xLog.equals(clientes.get(0).getLogin())){
+                       System.out.println("Login ou senha inválido!");
+                       break;
+                    }
+                    
                     do{
-                        
-                        System.out.println("");
-                        System.out.println("==== M A R I S A   B E A C H ====");
-                        System.out.println("");
-                        
                         
                         System.out.println("MENU CLIENTE");
                         System.out.println("");
@@ -213,7 +232,7 @@ public class SAP_Pratica {
                         System.out.println("");
                         System.out.println("2. Realizar Pedidos");
                         System.out.println("");
-                        System.out.print("Informe sua opção ou ZERO para sair:");
+                        System.out.print("Informe sua opção ou ZERO para sair: ");
                         opc = input.next();
                         
                         if(opc.equals("0")){
@@ -222,10 +241,52 @@ public class SAP_Pratica {
                         }
                         
                         switch(opc){
+                            
                             case "1" -> {
+                                
+                                Produto prd = new Produto();
+                                    
+                                System.out.println("");
+                                System.out.println("==== M A R I S A   B E A C H ====");
+                                System.out.println("");
+                                System.out.println("LISTA DE PRODUTOS");
+                                System.out.println("-------------------------------");
+                                int item = 1;
+                                for(Produto p:produtos){
+                                    System.out.printf("%d \t%s \tR$ %.2f\n", item++, p.getNome(), p.getValor());
+                                }
+                                
                                 break;
                             }
                             case "2" -> {
+                                
+                                ArrayList<Pedido> pedidos = new ArrayList();
+                                
+                                System.out.println("");
+                                System.out.println("==== M A R I S A   B E A C H ====");
+                                System.out.println("");
+                                System.out.println("CADASTRO DE PEDIDOS");
+                                System.out.println("-------------------");
+                                System.out.println("");
+                                System.out.println("LISTA DE PRODUTOS");
+                                System.out.println("---------------------------------------------------------");
+                                int item = 1;
+                                System.out.printf("ITEM \tPRODUTO \tVALOR\n");
+                                System.out.println("---------------------------------------------------------");        
+                                for(Produto p:produtos){
+                                    System.out.printf("%d \t%s \tR$ %.2f\n", item++, p.getNome(), p.getValor());
+                                }
+                                
+                                System.out.println("Informe o item: ");
+                                int itm = input.nextInt()-1;
+                                
+                                if(itm > produtos.size() || itm < 0){
+                                    System.out.println("Item não consta na lista");
+                                    continue;
+                                }
+                                
+                                int numPed = pedidos.get(pedidos.size()-1).getNumPedido() + 1;
+                                
                                 break;
                             }
                             default -> System.out.println("Opção inválida!!!");

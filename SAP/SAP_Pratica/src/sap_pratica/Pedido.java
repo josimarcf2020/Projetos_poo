@@ -12,22 +12,26 @@ import java.util.Date;
  */
 public class Pedido {
     
-    private String numPedido;
+    private int numPedido;
     private Date dataCriacao;
+    private String produto;
+    private double valor;
 
     public Pedido() {
     }
 
-    public Pedido(String numPedido, Date dataCriacao) {
+    public Pedido(int numPedido, Date dataCriacao, String produto, double valor) {
         this.numPedido = numPedido;
         this.dataCriacao = dataCriacao;
+        this.produto = produto;
+        this.valor = valor;
     }
 
-    public String getNumPedido() {
+    public int getNumPedido() {
         return numPedido;
     }
 
-    public void setNumPedido(String numPedido) {
+    public void setNumPedido(int numPedido) {
         this.numPedido = numPedido;
     }
 
@@ -38,7 +42,23 @@ public class Pedido {
     public void setDataCriacao(Date dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
-    
+
+    public String getProduto() {
+        return produto;
+    }
+
+    public void setProduto(String produto) {
+        this.produto = produto;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+ 
     public String imprimirInfo(){
         return "";
     }

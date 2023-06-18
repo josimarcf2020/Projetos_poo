@@ -27,7 +27,8 @@ public class SAP_Pratica {
         ArrayList<Cliente> clientes = new ArrayList();
         ArrayList<Produto> produtos = new ArrayList();
         ArrayList<Pedido> pedidos = new ArrayList();
-        
+        ArrayList<CartaoCredito> ccard = new ArrayList();
+                                             
         Admin adm = new Admin();
         Cliente cli = new Cliente();
         
@@ -320,7 +321,7 @@ public class SAP_Pratica {
                                 System.out.println("");
                                 System.out.println("==== M A R I S A   B E A C H ====");
                                 System.out.println("");
-                                System.out.println("LISTA DE PRODUTOS");
+                                System.out.println("LISTA DE PEDIDOS");
                                 System.out.println("--------------------------------------------------------------------------------");
                                 System.out.printf("ITEM \tPEDIDO \tPRODUTO \t\tVALOR\n");
                                 System.out.println("--------------------------------------------------------------------------------");
@@ -328,9 +329,101 @@ public class SAP_Pratica {
                                 for(Pedido p: pedidos){
                                     System.out.printf("%d \t%d \t%s \tR$ %.2f\n", item++, p.getNumPedido(), p.getProduto(), p.getValor());
                                 }
+                                System.out.println("--------------------------------------------------------------------------------");
                                 
                                 break;
                        
+                            }
+                            case "4" -> {
+                    
+                                Pedido ped = new Pedido();
+                                    
+                                System.out.println("");
+                                System.out.println("==== M A R I S A   B E A C H ====");
+                                System.out.println("");
+                                System.out.println("LISTA DE PEDIDOS");
+                                System.out.println("--------------------------------------------------------------------------------");
+                                System.out.printf("ITEM \tPEDIDO \tPRODUTO \t\tVALOR\n");
+                                System.out.println("--------------------------------------------------------------------------------");
+                                int item = 1;
+                                for(Pedido p: pedidos){
+                                    System.out.printf("%d \t%d \t%s \tR$ %.2f\n", item++, p.getNumPedido(), p.getProduto(), p.getValor());
+                                }
+                                System.out.println("--------------------------------------------------------------------------------"); 
+                                
+                                System.out.println("Infome o pedido a ser Encerrado: ");
+                                int pd = input.nextInt();
+                                
+                                if(pd > pedidos.get(pedidos.size()-1).getNumPedido() || pd < 1){
+                                    System.out.println("Numero de pedido inválido!");
+                                    break;
+                                }else{
+                                    if(pedidos.get(pd).getStatus() != 1){
+                                        System.out.println("Pedido já encerrado!!!");
+                                        break;
+                                    }
+                                }
+                                
+                                double total = 0;
+                                for(Pedido p: pedidos){
+                                    if(p.getNumPedido() == pd){
+                                        total += p.getValor();
+                                    }
+                                }
+                                
+                                System.out.printf("Valor TOTAL do Pedido %s: R$ %5.2f\n", pedidos.get(pd).getNumPedido(), total);
+                                System.out.println("");
+                                System.out.println("Forma de PAGAMENTO: 1 - PIX ou 2 - Cartão de Crédito (2x)");
+                                int fPag = input.nextInt();
+                                
+                                switch(fPag){
+                                    case 1 -> {
+                                        System.out.println("Gerar pagamento PIX para a chave 123.456.789-00");
+                                        pedidos.get(pd).setStatus(2);
+                                        break;
+                                    }
+                                    case 2 -> {
+                                        
+                                        CartaoCredito ccred = new CartaoCredito();
+                                        
+                                        System.out.println("Informe os dados do Cartão de Crédito: ");
+                                        String cCard = input.next();
+                                        
+                                        boolean existe = false;
+                                        for(CartaoCredito c: ccard){
+                                            if(cCard.equals(c.getNumero())){
+                                                System.out.println("Cartão ja CADASTRADO");
+                                                existe = true;
+                                                break;
+                                            }
+                                        }
+                                        
+                                        if(!existe){
+                                            System.out.println("CADASTRAR NOVO CARTÃO DE CRÉDITO");
+                                            System.out.println("");
+                                            System.out.println("Numero do Cartão: " + cCard);
+                                            ccred.setNumero(cCard);
+                                            System.out.println("");
+                                            System.out.println("Nome do Titular.: ");
+                                            ccred.setNumero(input.next());
+                                            System.out.println("");
+                                            System.out.println("Data de Validade: ");
+                                            ccred.setDtValidade(input.next());
+                                            System.out.println("");
+                                            System.out.println("Cod. Segurança..: ");
+                                            ccred.setCcv(input.next());
+                                            
+                                            ccard.add(ccred);
+                                        }
+                                        
+                                        break;
+                                    }
+                                    default -> {
+                                        System.out.println("Forma de pagamento INEXISTENTE!");
+                                    }
+                                }                                
+                    
+                                break;
                             }
                             default -> System.out.println("Opção inválida!!!");
                         }
@@ -340,6 +433,7 @@ public class SAP_Pratica {
                     break;
                     
                 }
+                
                 default -> System.out.println("Opção inválida!!!");
                             
             }

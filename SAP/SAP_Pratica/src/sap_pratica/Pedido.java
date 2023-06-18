@@ -16,15 +16,17 @@ public class Pedido {
     private Date dataCriacao;
     private String produto;
     private double valor;
+    private int status;
 
     public Pedido() {
     }
 
-    public Pedido(int numPedido, Date dataCriacao, String produto, double valor) {
+    public Pedido(int numPedido, Date dataCriacao, String produto, double valor, int status) {
         this.numPedido = numPedido;
         this.dataCriacao = dataCriacao;
         this.produto = produto;
         this.valor = valor;
+        this.status = status;
     }
 
     public int getNumPedido() {
@@ -58,7 +60,15 @@ public class Pedido {
     public void setValor(double valor) {
         this.valor = valor;
     }
- 
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     public String imprimirInfo(){
         return "";
     }

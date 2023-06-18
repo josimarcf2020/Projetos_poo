@@ -293,8 +293,14 @@ public class SAP_Pratica {
                                 
                                 if(pedidos.isEmpty()){
                                     ped.setNumPedido(1);
+                                    ped.setStatus(1);
                                 }else{
-                                    ped.setNumPedido(pedidos.get(pedidos.size()-1).getNumPedido() + 1);
+                                    if(pedidos.get(pedidos.size()-1).getStatus()==1){
+                                        ped.setNumPedido(pedidos.get(pedidos.size()-1).getNumPedido());                               
+                                    }else{
+                                        ped.setNumPedido(pedidos.get(pedidos.size()-1).getNumPedido() + 1);
+                                            }
+                                    ped.setStatus(1);
                                 }
                                 
                                 ped.setDataCriacao(formato.getCalendar().getTime());
@@ -315,14 +321,16 @@ public class SAP_Pratica {
                                 System.out.println("==== M A R I S A   B E A C H ====");
                                 System.out.println("");
                                 System.out.println("LISTA DE PRODUTOS");
-                                System.out.println("-------------------------------");
+                                System.out.println("--------------------------------------------------------------------------------");
+                                System.out.printf("ITEM \tPEDIDO \tPRODUTO \t\tVALOR\n");
+                                System.out.println("--------------------------------------------------------------------------------");
                                 int item = 1;
-                                for(Produto p:produtos){
-                                    System.out.printf("%d \t%s \tR$ %.2f\n", item++, p.getNome(), p.getValor());
+                                for(Pedido p: pedidos){
+                                    System.out.printf("%d \t%d \t%s \tR$ %.2f\n", item++, p.getNumPedido(), p.getProduto(), p.getValor());
                                 }
                                 
                                 break;
-                                break;
+                       
                             }
                             default -> System.out.println("Opção inválida!!!");
                         }
